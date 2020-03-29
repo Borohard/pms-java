@@ -1,6 +1,7 @@
 package pms.api.controllers.v1;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.rest.webmvc.RepositoryRestController;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
@@ -12,8 +13,8 @@ import pms.api.services.DepartmentsService;
 
 import java.util.List;
 
-@RestController
-@RequestMapping("/api/v1/departments/")
+@RepositoryRestController
+@RequestMapping("/api/v1/departments")
 public class DepartmentsController {
     @Autowired
     private DepartmentsService departments;

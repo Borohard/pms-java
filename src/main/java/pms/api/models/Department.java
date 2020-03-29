@@ -3,6 +3,8 @@ package pms.api.models;
 import lombok.Getter;
 import lombok.Setter;
 import lombok.ToString;
+import org.hibernate.annotations.Fetch;
+import org.hibernate.annotations.FetchMode;
 
 import javax.persistence.*;
 import java.util.Set;
@@ -19,7 +21,7 @@ public class Department extends BaseEntity {
     @OneToMany(mappedBy = "department")
     public Set<User> users;
 
-    @ManyToOne
+    @ManyToOne()
     @JoinColumn(name="responsible_user_id", nullable = true)
     public User responsibleUser;
 }

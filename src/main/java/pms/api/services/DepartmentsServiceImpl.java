@@ -13,6 +13,14 @@ public class DepartmentsServiceImpl implements DepartmentsService {
     private DepartmentsRepository departments;
 
     public List<Department> GetAll(){
-        return departments.findAll();
+        List<Department> response = departments.findAll();
+
+        //Исправить на изначально ленивую загрузку, ибо возникает self-reference loop
+        response.forEach(department -> {
+            department.users = null;
+            department.responsibleUser = null;
+        });
+
+        return response;
     }
 }
