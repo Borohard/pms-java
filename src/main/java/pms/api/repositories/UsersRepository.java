@@ -6,4 +6,5 @@ import pms.api.models.User;
 
 @RestResource(exported = false)
 public interface UsersRepository extends JpaRepository<User, Long> {
+    User findByLogin(String login);
 }
