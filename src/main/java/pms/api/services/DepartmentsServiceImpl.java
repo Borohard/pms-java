@@ -5,22 +5,41 @@ import org.springframework.stereotype.Service;
 import pms.api.models.Department;
 import pms.api.repositories.DepartmentsRepository;
 
+import javax.persistence.EntityExistsException;
 import java.util.List;
 
 @Service
 public class DepartmentsServiceImpl implements DepartmentsService {
-    @Autowired
-    private DepartmentsRepository departments;
+    private final DepartmentsRepository departments;
 
+    public DepartmentsServiceImpl(DepartmentsRepository departments) {
+        this.departments = departments;
+    }
+
+    @Override
+    public Department GetById(long id) {
+        return departments.findOne(id);
+    }
+
+    @Override
+    public void Add(Department department) {
+        if (departments.findByName(department.getName()) != null)
+            throw new EntityExistsException("Department with name " + department.getName() + " already exists");
+
+        departments.save(department);
+    }
+
+    @Override
+    public void Update(Department department) {
+        if (department.getId() == null) {
+            throw new IllegalArgumentException("Department with id " + department.getId() + " doesn't exists");
+        }
+
+        departments.save(department);
+    }
+
+    @Override
     public List<Department> GetAll(){
-        List<Department> response = departments.findAll();
-
-        //Исправить на изначально ленивую загрузку, ибо возникает self-reference loop
-        response.forEach(department -> {
-            department.users = null;
-            department.responsibleUser = null;
-        });
-
-        return response;
+        return departments.findAll();
     }
 }

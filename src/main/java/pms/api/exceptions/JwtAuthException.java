@@ -1,4 +1,4 @@
-package pms.api.security.jwt;
+package pms.api.exceptions;
 
 import org.springframework.security.core.AuthenticationException;
 

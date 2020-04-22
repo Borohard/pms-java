@@ -13,15 +13,22 @@ import java.util.List;
 @Service
 public class UserServiceImpl implements UserService{
     private final UsersRepository userRepository;
+    private final RolesRepository rolesRepository;
+    private final BCryptPasswordEncoder passwordEncoder;
 
     @Autowired
-    public UserServiceImpl(UsersRepository userRepository) {
+    public UserServiceImpl
+            (UsersRepository userRepository, RolesRepository rolesRepository, BCryptPasswordEncoder passwordEncoder) {
         this.userRepository = userRepository;
+        this.rolesRepository = rolesRepository;
+        this.passwordEncoder = passwordEncoder;
     }
 
     @Override
-    public User register(User user) {
-        throw new UnsupportedOperationException();
+    public void register(User user) {
+        user.setRole(rolesRepository.findByName("ROLE_USER"));
+        user.setPassword(passwordEncoder.encode(user.getPassword()));
+        userRepository.save(user);
     }
 
     @Override
@@ -33,11 +40,12 @@ public class UserServiceImpl implements UserService{
     @Override
     public User findByLogin(String login) {
         User result = userRepository.findByLogin(login);
+        return result;
+    }
 
-        if (result == null) {
-            return null;
-        }
-
+    @Override
+    public User findById(Long id) {
+        User result = userRepository.findOne(id);
         return result;
     }
 

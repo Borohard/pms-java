@@ -9,6 +9,7 @@ import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Component;
+import pms.api.exceptions.JwtAuthException;
 import pms.api.models.Role;
 
 import javax.annotation.PostConstruct;
@@ -21,7 +22,7 @@ import java.util.List;
 @Component
 public class JwtTokenProvider {
     private String secret = "123";
-    private long validityInMilliseconds = 300000;
+    private long validityInMilliseconds = 3000000;
 
     @Autowired
     private UserDetailsService userDetailsService;
@@ -63,7 +64,7 @@ public class JwtTokenProvider {
 
     public String resolveToken(HttpServletRequest req) {
         String bearerToken = req.getHeader("Authorization");
-        if (bearerToken != null && bearerToken.startsWith("Bearer_")) {
+        if (bearerToken != null && bearerToken.startsWith("Bearer")) {
             return bearerToken.substring(7, bearerToken.length());
         }
         return null;
