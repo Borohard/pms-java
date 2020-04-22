@@ -6,8 +6,8 @@ import pms.api.models.Department;
 import java.util.List;
 
 public interface DepartmentsService {
-    List<Department> GetAll();
-    Department GetById(long id);
-    void Add(Department department);
-    void Update(Department department);
+    List<Department> getAll();
+    Department getById(long id);
+    void add(Department department);
+    void update(Department department);
 }

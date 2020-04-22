@@ -5,6 +5,10 @@ import pms.api.models.User;
 import java.util.List;
 
 public interface UserService {
+    Boolean isCurrentUserAdmin();
+
+    User getCurrentUser();
+
     void register(User user);
 
     List<User> getAll();

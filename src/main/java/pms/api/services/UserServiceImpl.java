@@ -2,6 +2,9 @@ package pms.api.services;
 
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.authority.SimpleGrantedAuthority;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 import pms.api.models.User;
@@ -22,6 +25,18 @@ public class UserServiceImpl implements UserService{
         this.userRepository = userRepository;
         this.rolesRepository = rolesRepository;
         this.passwordEncoder = passwordEncoder;
+    }
+
+    @Override
+    public Boolean isCurrentUserAdmin() {
+        Authentication currentUser = SecurityContextHolder.getContext().getAuthentication();
+        return (currentUser.getAuthorities().contains(new SimpleGrantedAuthority("ROLE_ADMIN")));
+    }
+
+    @Override
+    public User getCurrentUser() {
+        Authentication currentUser = SecurityContextHolder.getContext().getAuthentication();
+        return userRepository.findByLogin(currentUser.getName());
     }
 
     @Override

@@ -1,5 +1,6 @@
 package pms.api.models;
 
+import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.Setter;
 import lombok.ToString;
@@ -11,6 +12,7 @@ import javax.persistence.*;
 @Getter
 @Setter
 @ToString
+@EqualsAndHashCode(callSuper = false)
 public class ClaimPosition extends BaseEntity {
     @Column(name="comment")
     public String comment;

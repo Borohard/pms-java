@@ -24,7 +24,7 @@ public class AdminController {
     @PostMapping("departments")
     public ResponseEntity addDepartment(@RequestBody DepartmentDto departmentDto){
         Department departmentToAdd = departmentMapper.ToDepartmentFromDto(departmentDto);
-        departments.Add(departmentToAdd);
+        departments.add(departmentToAdd);
 
         return new ResponseEntity(HttpStatus.CREATED);
     }
@@ -32,7 +32,7 @@ public class AdminController {
     @PutMapping("departments")
     public ResponseEntity updateDepartment(@RequestBody DepartmentDto departmentDto){
         Department departmentToUpdate = departmentMapper.ToDepartmentFromDto(departmentDto);
-        departments.Update(departmentToUpdate);
+        departments.update(departmentToUpdate);
 
         return new ResponseEntity(HttpStatus.OK);
     }

@@ -1,5 +1,6 @@
 package pms.api.models;
 
+import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.Setter;
 import lombok.ToString;
@@ -12,6 +13,7 @@ import java.util.Set;
 @Getter
 @Setter
 @ToString
+@EqualsAndHashCode(callSuper = false, of={"login"})
 public class User extends BaseEntity {
     @Column(name="login")
     public String login;

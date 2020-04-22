@@ -1,5 +1,6 @@
 package pms.api.models;
 
+import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.Setter;
 import lombok.ToString;
@@ -15,6 +16,7 @@ import java.util.Set;
 @Getter
 @Setter
 @ToString
+@EqualsAndHashCode(callSuper = false, of={"name"})
 public class Role extends BaseEntity {
     @Column(name="role_name")
     public String name;

@@ -17,12 +17,12 @@ public class DepartmentsServiceImpl implements DepartmentsService {
     }
 
     @Override
-    public Department GetById(long id) {
+    public Department getById(long id) {
         return departments.findOne(id);
     }
 
     @Override
-    public void Add(Department department) {
+    public void add(Department department) {
         if (departments.findByName(department.getName()) != null)
             throw new EntityExistsException("Department with name " + department.getName() + " already exists");
 
@@ -30,7 +30,7 @@ public class DepartmentsServiceImpl implements DepartmentsService {
     }
 
     @Override
-    public void Update(Department department) {
+    public void update(Department department) {
         if (department.getId() == null) {
             throw new IllegalArgumentException("Department with id " + department.getId() + " doesn't exists");
         }
@@ -39,7 +39,7 @@ public class DepartmentsServiceImpl implements DepartmentsService {
     }
 
     @Override
-    public List<Department> GetAll(){
+    public List<Department> getAll(){
         return departments.findAll();
     }
 }

@@ -1,9 +1,7 @@
 package pms.api.mappers;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import pms.api.dto.UserRegisterDto;
-import pms.api.models.Department;
 import pms.api.models.User;
 import pms.api.services.DepartmentsService;
 
@@ -22,7 +20,7 @@ public class UserMapperImpl implements UserMapper {
         res.setLogin(registerDto.getUsername());
         res.setPassword(registerDto.getPassword());
         res.setFullName(registerDto.getFullName());
-        res.setDepartment(departments.GetById(registerDto.getDepartmentId()));
+        res.setDepartment(departments.getById(registerDto.getDepartmentId()));
 
         return res;
     }

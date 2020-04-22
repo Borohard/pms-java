@@ -13,7 +13,6 @@ import pms.api.services.DepartmentsService;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.stream.Collectors;
 
 @RepositoryRestController
 @RequestMapping("/api/v1/departments")
@@ -28,7 +27,7 @@ public class DepartmentsController {
 
     @RequestMapping(value = "", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
     public ResponseEntity getAll() {
-        List<Department> dbDepartments = departments.GetAll();
+        List<Department> dbDepartments = departments.getAll();
         if (dbDepartments.isEmpty()){
             return new ResponseEntity<>(HttpStatus.NOT_FOUND);
         }
